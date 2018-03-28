@@ -1,4 +1,4 @@
-//Author:
+//Author:Xinrui Li
 #include <iostream>
 
 using namespace std;
@@ -14,9 +14,9 @@ const int QUIT = -1;
 int main()
 {
   //3x3 matrix of characters, initially with blank spaces in each position
-  char board[ROWS][COLUMNS] = {{BLANK, BLANK, BLANK},
-                               {BLANK, BLANK, BLANK},
-                               {BLANK, BLANK, BLANK}};
+  char board[3][3] = {{'1', '2', '3'},
+                      {'4', '5', '6'},
+                      {'7', '8', '9'}};
 
   char turn = X; //Player X always goes first
   int row;
