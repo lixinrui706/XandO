@@ -10,13 +10,29 @@ const char BLANK = ' ';
 const char X = 'X';
 const char O = 'O';
 const int QUIT = -1;
+bool checkWin(char board[3][3])
+{
+  int i = 0,j = 0;
+  for(int i = 0; i < 3; i++)
+  { 
+   if(board[i][0] == board[i][1] && board[i][1] == board[i][2])
+     return false;
+   if(board[0][i] == board[1][i] && board[1][i] == board[2][i])
+     return false;
+  }
+  if(board[0][0] == board[1][1] && board[1][1] == board[2][2])
+    return false;
+  if(board[0][2] == board[1][1] && board[1][1] == board[2][0])
+    return false;
+  return true;
+}  
 
 int main()
 {
   //3x3 matrix of characters, initially with blank spaces in each position
-  char board[3][3] = {{'1', '2', '3'},
-                      {'4', '5', '6'},
-                      {'7', '8', '9'}};
+  char board[3][3] = {{'0', '1', '2'},
+                      {'1', '5', '6'},
+                      {'2', '8', '9'}};
 
   char turn = X; //Player X always goes first
   int row;
@@ -48,7 +64,14 @@ int main()
     //1-B-1.  turn should be assigned the value 'O'
     //1-C.  In any other case, then...
     //1-C-1.  turn should be assigned the value 'X'
-    
+    if(turn == X)
+    {
+     board[row][column] = X;
+    }
+    else
+    {
+     board[row][column] = O;
+    } 
     cout<<"\nBOARD\n-----\n";
     //TODO: Print the current board
     //Outline
@@ -57,7 +80,30 @@ int main()
     //1-A-1.  Display the value of the board at location of r and c
     //1-A-2. Display a space
     //1-B. Display an newline to move to the next row of the board
-    
+    for(int i = 0; i < 3; i++)
+    {
+      for(int j = 0; j < 3; j++)
+      {
+        if(board[i][j] == O|| board[i][j] == X)
+         cout << board[i][j] << " ";
+         else
+          cout<<" ";
+      }
+      cout << endl;
+    }
+   if(playing)
+   {
+    playing = checkWin(board);
+    if(!playing)
+    {
+     cout<<"Winner is "<<turn<<endl;
+    }
+   if(turn == X)
+    turn = O;
+   else
+    turn = X;
+   } 
+
   }while( playing );
 
   cout<<"Goodbye!\n";
